@@ -15,20 +15,12 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\adria\OneDrive\Documentos\GitHub\pospia
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/adria/OneDrive/Documentos/GitHub/pospia/Views/Home/Historic.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIaXN0b3JpYy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/adria/OneDrive/Documentos/GitHub/pospia/Views/Home/Home.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb21lLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/adria/OneDrive/Documentos/GitHub/pospia/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/adria/OneDrive/Documentos/GitHub/pospia/Views/Home/Promotions.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9tb3Rpb25zLmNzaHRtbA==
+[C:/Users/adria/OneDrive/Documentos/GitHub/pospia/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/adria/OneDrive/Documentos/GitHub/pospia/Views/Shared/Error.cshtml]

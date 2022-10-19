@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Users\\adria\\source\\repos\\POS\\POS.csproj": {}
+    "C:\\Users\\adria\\OneDrive\\Documentos\\GitHub\\pospia\\POS.csproj": {}
   },
   "projects": {
-    "E:\\Users\\adria\\source\\repos\\POS\\POS.csproj": {
+    "C:\\Users\\adria\\OneDrive\\Documentos\\GitHub\\pospia\\POS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Users\\adria\\source\\repos\\POS\\POS.csproj",
+        "projectUniqueName": "C:\\Users\\adria\\OneDrive\\Documentos\\GitHub\\pospia\\POS.csproj",
         "projectName": "POS",
-        "projectPath": "E:\\Users\\adria\\source\\repos\\POS\\POS.csproj",
+        "projectPath": "C:\\Users\\adria\\OneDrive\\Documentos\\GitHub\\pospia\\POS.csproj",
         "packagesPath": "C:\\Users\\adria\\.nuget\\packages\\",
-        "outputPath": "E:\\Users\\adria\\source\\repos\\POS\\obj\\",
+        "outputPath": "C:\\Users\\adria\\OneDrive\\Documentos\\GitHub\\pospia\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\adria\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,7 +45,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -57,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

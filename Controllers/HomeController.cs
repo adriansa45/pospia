@@ -18,7 +18,15 @@ namespace POS.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Home()
+        {
+            return View();
+        }
+        public IActionResult Historic()
+        {
+            return View();
+        }
+        public IActionResult Promotions()
         {
             return View();
         }
