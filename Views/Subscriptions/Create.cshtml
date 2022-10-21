@@ -1,0 +1,50 @@
+﻿@model Subscription
+@{
+	ViewData["Title"] = "Create Subscription";
+}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+	<h1 class="h3 mb-0 text-gray-800">Subscription</h1>
+</div>
+
+
+<div class="row">
+	<div class="col">
+		<div class="card shadow mb-4">
+			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold text-dark">A subscription is an transaction that is carried out monthly.</h6>
+			</div>
+			<div class="card-body">
+				<form asp-action="Create">
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+					<input type="hidden" asp-for="AccountId" />
+					<div class="mb-3">
+						<label asp-for="Name" class="form-label"></label>
+						<input asp-for="Name" class="form-control" />
+						<span asp-validation-for="Name" class="text-danger"></span>
+					</div>
+
+					<div class="mb-3">
+						<label asp-for="Amount" class="form-label"></label>
+						<input asp-for="Amount" class="form-control" />
+						<span asp-validation-for="Amount" class="text-danger"></span>
+					</div>
+
+					<div class="mb-3">
+						<label asp-for="Date" class="form-label"></label>
+						<input asp-for="Date" type="date" class="form-control" />
+						<span asp-validation-for="Date" class="text-danger"></span>
+					</div>
+
+					<button type="submit" class="btn btn-primary">Add</button>
+					<a class="btn btn-secondary" asp-action="Index">Cancel</a>
+				</form>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

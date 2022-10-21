@@ -1,6 +1,24 @@
 ﻿@{
     ViewData["Title"] = "Productos";
 }
+
+<style>
+    .grid{
+        display:grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 1rem;
+    }
+</style>
 <h1>@ViewData["Title"]</h1>
 
 <input placeholder="Buscar producto..." class="input-group"/>
+
+
+<div class="grid">
+    <div class="grid-item">hola</div>
+    <div class="grid-item">hola</div>
+    <div class="grid-item">hola</div>
+    <div class="grid-item">hola</div>
+    <div class="grid-item">hola</div>
+
+</div>

@@ -35,7 +35,14 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+            <div class="row">
+            <div class="col-9">
+                @RenderBody()
+            </div>           
+            <div class="col-3 border-left">
+                aside
+            </div>
+            </div>
         </main>
     </div>
 
