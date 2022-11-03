@@ -19,6 +19,8 @@ builder.Services.AddTransient<IServiceUser, ServiceUser>();
 //builder.Services.AddTransient<ITransactionsRepository, TransactionsRepository>();
 //builder.Services.AddTransient<IAccountsRepository, AccountsRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IOrdersRepository, OrdersRepository>();
+builder.Services.AddTransient<IProductsRepository, ProductsRepository>();
 //builder.Services.AddTransient<IDashboardService, DashboardService>();
 //builder.Services.AddTransient<ISubscriptionsRepository, SubscriptionsRepository>();
 //builder.Services.AddTransient<ICategoriesRepository, CategoriesRepository>();
