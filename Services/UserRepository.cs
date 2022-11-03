@@ -13,14 +13,10 @@ namespace POS.Services
     public class UserRepository: IUserRepository
     {
         private readonly string connectionString;
-		private readonly IAccountsRepository accountsRepository;
-        private readonly IDashboardService dashboardService;
 
-        public UserRepository(IConfiguration configuration, IAccountsRepository accountsRepository, IDashboardService dashboardService)
+        public UserRepository(IConfiguration configuration)
         {
             connectionString = configuration.GetConnectionString("DefaultConnection");
-			this.accountsRepository = accountsRepository;
-            this.dashboardService = dashboardService;
         }
 
         public async Task<int> CreateUser(User user)
