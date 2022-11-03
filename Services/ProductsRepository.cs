@@ -7,6 +7,8 @@ namespace POS.Services
     public interface IProductsRepository
     {
         Task<IEnumerable<Product>> GetProducts(IEnumerable<Product> products);
+        Task<IEnumerable<Product>> GetProducts();
+        Task<IEnumerable<Product>> GetProducts(string code);
     }
     public class ProductsRepository: IProductsRepository
     {
@@ -23,7 +25,7 @@ namespace POS.Services
             
             foreach (var p in products)
             {
-                var product = await connection.QuerySingleAsync<Product>("select * from products where product_id = @ProductId", new {p.ProductId});
+                var product = await connection.QuerySingleAsync<Product>("select * from products where ProductId = @ProductId", new {p.ProductId});
                 product.Amount = p.Amount;
                 productsList.Add(product);
             }
@@ -32,13 +34,19 @@ namespace POS.Services
         public async Task<IEnumerable<Product>> GetProducts()
         {
             using var connection = new MySqlConnection(connectionString);
-            return await connection.QuerySingleAsync<IEnumerable<Product>>("select * from products");
+            return await connection.QueryAsync<Product>("select * from products");
+        }
+
+        public async Task<IEnumerable<Product>> GetProducts(string code)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            return await connection.QueryAsync<Product>(String.Format("select * from products where cast(productId as CHAR) LIKE '%{0}%' or name LIKE '%{0}%';", code));
         }
 
         public async Task<Product> GetProduct(int ProductId)
         {
             using var connection = new MySqlConnection(connectionString);
-            var product = await connection.QuerySingleAsync<Product>("select * from products where product_id = @ProductId", new { ProductId });
+            var product = await connection.QuerySingleAsync<Product>("select * from products where ProductId = @ProductId", new { ProductId });
 
             return product;
         }

@@ -37,6 +37,7 @@ namespace POS.Controllers
                         ProductId = product.ProductId,
                         OrderId = orderId,
                         Price = product.Price,
+                        Total = product.Price * product.Amount,
                         Amount = product.Amount,
                         Created = DateTime.Now
                     };

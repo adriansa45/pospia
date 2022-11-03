@@ -1,6 +1,31 @@
-﻿@{
+﻿@model IEnumerable<Order>
+@{
     ViewData["Title"] = "Historial";
 }
 <h1>@ViewData["Title"]</h1>
 
 <p>Historial de transacciones</p>
+
+<div class="container">
+    @foreach (var order in Model)
+    {
+        <div class="row card mb-3">
+            <div class="card-header">
+                <p>OrderId: @order.OrderId - Fecha: @order.Created</p>
+            </div>
+            <div class="card-body">
+            @foreach (var line in order.orderLines)
+            {
+                    <p>Product: @line.Name - Cantidad: @line.Amount  -  Precio: @line.Price - Subtotal: @line.Total</p>
+                    @if (!line.Equals(order.orderLines.Last()))
+                    {
+                        <hr/>
+                    }           
+            }
+            </div>
+            <div class="card-footer">
+                <p>Total: @order.Total</p>
+            </div>
+        </div>
+    }
+</div>
