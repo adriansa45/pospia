@@ -7,9 +7,9 @@ $(document).ready(function () {
     carrito.html('');
 });
 
-function AñadirObjeto(id) {
+function AñadirObjeto(id, name, price) {
     if (productos.every(p => p.ProductId != id)) {
-        let producto = { ProductId: id, Amount: 1 };
+        let producto = { ProductId: id, Amount: 1, Name: name, Price: price };
         productos.push(producto);
     } else {
         productos.find(p => p.ProductId === id).Amount += 1;
@@ -35,31 +35,36 @@ function QuitarObjeto(id) {
 function ImprimirProductos() {
     carrito.html('');
     productos.forEach(function (e) {
-        let htmlstring = '<div class="card" ><div class="card-header">Nombre</div><div class="card-body"><img style="width: 100%;" src = "/imgs/coca.webp"/> </div><div class="card-footer text-dark" >'
-            + '<button id="4" class="btn btn-primary" onclick = "AñadirObjeto(' + e.ProductId + ')" > + </button><input value="' + e.Amount
-            + '"/><button id="4" class="btn btn-danger" onclick = "QuitarObjeto(' + e.ProductId + ')" > - </button></div></div>';
+        let htmlstring = '<div class="card" style="max-height:20rem" ><div class="card-header">' + e.Name + '</div><div class="card-body"><img style="max-height: 10vh;" src = "/imgs/coca.webp"/>'
+            + '</div><div class="card-footer form-group text-dark" ><div class="form-group" style="display: flex;">'
+            + '<button id="4" class="btn btn-primary" onclick = "AñadirObjeto(' + e.ProductId + ')" > + </button><input class="form-control" value="' + e.Amount
+            + '"/><button id="4" class="btn btn-danger" onclick = "QuitarObjeto(' + e.ProductId + ')" > - </button></div></div></div>';
         carrito.html(carrito.html() + htmlstring);
 
     });
 
+    $('#Total').html(productos.reduce((partialSum, a) => partialSum + a.Price * a.Amount, 0));
 }
 
 async function BuyProducts() {
-    try {
-        const response = await fetch('/Orders/BuyProducts', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(productos),
-        });
-        if (response.ok) {
-            //return json
-            console.log(response);
-        } else {
-            //
+    if (productos.length != 0) {
+        try {
+
+            const response = await fetch('/Orders/BuyProducts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(productos),
+            });
+            if (response.ok) {
+                productos = [];
+                ImprimirProductos();
+            } else {
+                //
+            }
+        } catch (e) {
+            console.log(e);
         }
-    } catch (e) {
-        console.log(e);
     }
 }

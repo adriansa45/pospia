@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Product>
 @{
-    ViewData["Title"] = "Productos";
+    ViewData["Title"] = "Inventario";
 }
 
 <style>
@@ -12,16 +12,7 @@
 </style>
 <h1>@ViewData["Title"]</h1>
 
-<form asp-action="Index">
-    <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Buscar producto..." aria-describedby="SearchBtn">
-  <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="submit" id="SearchBtn">Buscar</button>
-  </div>
-</div>
-</form>
-
-
+<input placeholder="Buscar producto..." class="form-control mb-3"/>
 
 
 <div class="grid">
@@ -32,7 +23,10 @@
         <div class="card-body"><img style="width: 100%;" src="~/imgs/@product.Image" /></div>
         <div class="card-footer">
             <p>$ @product.Price</p>
-            <button id="@product.ProductId" class="btn btn-primary" onclick="AñadirObjeto(@product.ProductId, '@product.Name', @product.Price)">Añadir producto</button>
+            <div class="input-group">
+                <button id="@product.ProductId" class="btn btn-primary">Editar producto</button>
+                <button id="@product.ProductId" class="btn btn-danger">Borrar producto</button>
+            </div>
         </div>
     </div>
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using POS.Models;
+using POS.Services;
 using System.Diagnostics;
 
 namespace POS.Controllers
@@ -7,10 +8,17 @@ namespace POS.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IOrdersRepository ordersRepository;
+        private readonly IServiceUser serviceUser;
+        private readonly IProductsRepository productsRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IOrdersRepository ordersRepository, 
+            IServiceUser serviceUser, IProductsRepository productsRepository)
         {
             _logger = logger;
+            this.ordersRepository = ordersRepository;
+            this.serviceUser = serviceUser;
+            this.productsRepository = productsRepository;
         }
 
         public IActionResult Index()
@@ -18,13 +26,16 @@ namespace POS.Controllers
             return View();
         }
 
-        public IActionResult Home()
+        public async Task<IActionResult> Home()
         {
-            return View();
+            var products = await productsRepository.GetProducts();
+            return View(products);
         }
-        public IActionResult Historic()
+        public async Task<IActionResult> Historic()
         {
-            return View();
+            int userId = serviceUser.GetUserId();
+            var model = await ordersRepository.GetOrders(userId);
+            return View(model);
         }
         public IActionResult Promotions()
         {

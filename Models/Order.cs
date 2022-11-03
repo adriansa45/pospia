@@ -6,5 +6,6 @@
         public decimal Total { get; set; }
         public DateTime Created { get; set; }
         public int CreatedBy { get; set; }
+        public List<OrderLine>? orderLines { get; set; }
     }
 }
