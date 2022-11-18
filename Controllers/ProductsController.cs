@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Google.Protobuf;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using POS.Models;
 using POS.Services;
+using System.Data.Common;
+using System.Transactions;
 
 namespace POS.Controllers
 {
-    public class ProductsController: Controller
+    public class ProductsController : Controller
     {
         private readonly IProductsRepository productsRepository;
 
@@ -12,7 +16,7 @@ namespace POS.Controllers
         {
             this.productsRepository = productsRepository;
         }
-        
+
         public async Task<IActionResult> Index(string? code = null)
         {
             IEnumerable<Product> model;
@@ -28,17 +32,90 @@ namespace POS.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Crear()
+        public async Task<IActionResult> Create()
         {
             return View();
         }
-        public async Task<IActionResult> Editar()
+        [HttpPost]
+        public async Task<IActionResult> Create(Product product)
         {
-            return View();
+
+            if (!ModelState.IsValid || product.FormFile is null)
+            {
+                return View(product);
+            }
+
+            product.Image = await SaveImage(product.FormFile);
+
+            await productsRepository.AddProduct(product);
+
+
+            return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Eliminar()
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            var product = await productsRepository.GetProduct(id);
+
+            if (product is null)
+            {
+                return RedirectToAction("NoFound", "Home");
+            }
+
+            return View(product);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(Product product)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("NoFound", "Home");
+            }
+            if (product.FormFile is not null)
+            {
+                product.Image = await SaveImage(product.FormFile);
+            }
+
+
+            await productsRepository.EditProduct(product);
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var product = await productsRepository.GetProduct(id);
+            if (product is null)
+            {
+                return RedirectToAction("NoFound", "Home");
+            }
+            return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteProduct(Product product)
+        {
+            if (product is null)
+            {
+                return RedirectToAction("NoFound", "Home");
+            }
+
+            await productsRepository.Delete(product.ProductId);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<string> SaveImage (IFormFile file)
+        {
+            byte[] bytes;
+            using (var ms = new MemoryStream())
+            {
+                file.CopyTo(ms);
+                bytes = ms.ToArray();
+            }
+            var name = String.Concat(Guid.NewGuid().ToString(), ".webp");
+            var path = Path.Combine(Path.GetFullPath("wwwroot/imgs/"), name);
+
+            await System.IO.File.WriteAllBytesAsync(path, bytes);
+            return name;
         }
     }
 }

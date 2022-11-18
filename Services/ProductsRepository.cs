@@ -6,6 +6,10 @@ namespace POS.Services
 {
     public interface IProductsRepository
     {
+        Task AddProduct(Product product);
+        Task Delete(int id);
+        Task EditProduct(Product product);
+        Task<Product> GetProduct(int ProductId);
         Task<IEnumerable<Product>> GetProducts(IEnumerable<Product> products);
         Task<IEnumerable<Product>> GetProducts();
         Task<IEnumerable<Product>> GetProducts(string code);
@@ -37,6 +41,7 @@ namespace POS.Services
             return await connection.QueryAsync<Product>("select * from products");
         }
 
+
         public async Task<IEnumerable<Product>> GetProducts(string code)
         {
             using var connection = new MySqlConnection(connectionString);
@@ -49,6 +54,36 @@ namespace POS.Services
             var product = await connection.QuerySingleAsync<Product>("select * from products where ProductId = @ProductId", new { ProductId });
 
             return product;
+        }
+
+        public async Task EditProduct(Product product)
+        {
+            using var connection = new MySqlConnection(connectionString);
+
+            await connection.ExecuteAsync(@"UPDATE products SET
+                                            name = @Name,
+                                            amount = @Amount,
+                                            price = @Price,
+                                            image = @Image
+                                            where ProductId = @ProductId", product);
+        }
+
+        public async Task AddProduct(Product product)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            int id = await connection.QuerySingleAsync<int>(@"INSERT INTO products 
+                                                            (name, amount, price, image)
+                                                            VALUES 
+                                                            (@Name, @Amount, @Price, @Image);
+                                                            SELECT LAST_INSERT_ID();", product);
+
+            product.ProductId = id;
+        }
+
+        public async Task Delete(int id)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            await connection.ExecuteAsync("DELETE from products WHERE ProductId = @id", new { id });
         }
     }
 }

@@ -13,7 +13,7 @@
 <h1>@ViewData["Title"]</h1>
 
 <input placeholder="Buscar producto..." class="form-control mb-3"/>
-
+<a asp-action="Create" class="btn btn-primary mb-3">Registrar nuevo producto</a>
 
 <div class="grid">
     @foreach (var product in Model)
@@ -24,8 +24,8 @@
         <div class="card-footer">
             <p>$ @product.Price</p>
             <div class="input-group">
-                <button id="@product.ProductId" class="btn btn-primary">Editar producto</button>
-                <button id="@product.ProductId" class="btn btn-danger">Borrar producto</button>
+                 <a asp-action="Edit" asp-route-id="@product.ProductId" class="btn btn-primary">Editar producto</a>
+                 <a asp-action="Delete" asp-route-id="@product.ProductId" class="btn btn-danger">Borrar producto</a>
             </div>
         </div>
     </div>
