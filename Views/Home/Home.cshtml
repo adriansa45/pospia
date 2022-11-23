@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Productos";
 }
-
+@*
 <style>
     .grid{
         display:grid;
@@ -19,21 +19,37 @@
     <button class="btn btn-outline-secondary" type="submit" id="SearchBtn">Buscar</button>
   </div>
 </div>
-</form>
+</form>*@
 
 
 
 
-<div class="grid">
+<div class="products">
     @foreach (var product in Model)
     {
-    <div class="card">
+
+        <div class="product">
+            <div class="divimg">
+                <img src="~/imgs/@product.Image" alt="Imagen">
+            </div>
+            <div class="info">
+                <div>
+                    <p class="name">@product.Name</p>
+                    <div>
+                        <p class="price">$ @product.Price</p>
+                        <input class="btn comprar" type="button" onclick="AñadirObjeto(@product.ProductId, '@product.Name', @product.Price)" id="@product.ProductId" value="Añadir producto">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+@*    <div class="card">
         <div class="card-header">@product.Name</div>
         <div class="card-body"><img style="width: 100%;" src="~/imgs/@product.Image" /></div>
         <div class="card-footer">
             <p>$ @product.Price</p>
             <button id="@product.ProductId" class="btn btn-primary" onclick="AñadirObjeto(@product.ProductId, '@product.Name', @product.Price)">Añadir producto</button>
         </div>
-    </div>
+    </div>*@
     }
 </div>

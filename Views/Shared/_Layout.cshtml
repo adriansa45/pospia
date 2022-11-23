@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +8,50 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/POS.styles.css" asp-append-version="true" />
 </head>
+
+
+<body>
+	<div class="grid">
+		<div class="item sidebar">
+			<nav>
+                <div class="op active "><a class="ob" asp-controller="Home" asp-action="Home"><i class="fa-solid fa-house"></i><i class="bi bi-house"></i></a></div>
+                <div class="op" ><a class="ob" asp-controller="Home" asp-action="Historic"><i class="bi bi-clock-history"></i></a></div>
+                <div class="op" ><a class="ob" asp-controller="Products" asp-action="Index"><i class="bi bi-archive"></i></a></div>
+			</nav>
+
+		</div>
+		<div class="item body">
+			<div class="top">Bienvenido <p class="nombre">Adrian Robledo</p></div>
+			<div class="bot">
+                @RenderBody()
+			</div>
+		</div>
+		<div class="item cart">
+
+			<div class="top">
+				<h3>Carrito</h3>
+			</div>
+			<div class="mid" id="carrito">
+				
+			</div>
+			<div class="bot">
+                <p>Total: $<span id="Total">0.00</span></p>
+                <button class="btna Comprar" onclick="BuyProducts()">pagar</button>
+			</div>
+
+		</div>
+
+	</div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+
+
+@*
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -50,14 +94,5 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - POS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
+</body>*@
 </html>

@@ -2,32 +2,36 @@
 @{
     ViewData["Title"] = "Inventario";
 }
-
-<style>
-    .grid{
-        display:grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-    }
-</style>
 <h1>@ViewData["Title"]</h1>
 
-<input placeholder="Buscar producto..." class="form-control mb-3"/>
-<a asp-action="Create" class="btn btn-primary mb-3">Registrar nuevo producto</a>
+@*<input placeholder="Buscar producto..." class="form-control mb-3"/>*@
+<a asp-action="Create" class="btn btn-comprar mb-3">Registrar nuevo producto</a>
 
-<div class="grid">
+<div class="products">
     @foreach (var product in Model)
     {
-    <div class="card">
+        <div class="product">
+            <div class="divimg">
+                <img src="~/imgs/@product.Image" alt="">
+            </div>
+            <div class="info">
+                <div>
+                    <p class="name">@product.Name</p>
+                    <div class="input-group">
+                        <a asp-action="Edit" asp-route-id="@product.ProductId" class="btn btn-primary">Editar producto</a>
+                        <a asp-action="Delete" asp-route-id="@product.ProductId" class="btn btn-danger">Borrar producto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+   @* <div class="card">
         <div class="card-header">@product.Name</div>
         <div class="card-body"><img style="width: 100%;" src="~/imgs/@product.Image" /></div>
         <div class="card-footer">
             <p>$ @product.Price</p>
-            <div class="input-group">
-                 <a asp-action="Edit" asp-route-id="@product.ProductId" class="btn btn-primary">Editar producto</a>
-                 <a asp-action="Delete" asp-route-id="@product.ProductId" class="btn btn-danger">Borrar producto</a>
-            </div>
+            
         </div>
-    </div>
+    </div>*@
     }
 </div>
