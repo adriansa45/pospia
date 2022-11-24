@@ -62,16 +62,16 @@ body {
 
 .cart {
     display: grid;
-    align-items: stretch;
+    align-content: space-between;
     max-width: 380px;
     height: 100%;
     color: white;
     background-color: #131820;
     box-shadow: 2px -1px 28px 0px rgba(0,0,0,0.75);
+    margin-bottom:20px;
 }
 
     .cart .mid {
-        height: 550px;
         overflow-y: auto;
     }
 
@@ -141,7 +141,6 @@ body {
 .cart .bot {
     max-height: 110px;
     display: grid;
-    align-items: flex-end;
     justify-content: center;
     margin: 20px;
     margin-bottom:20px
@@ -162,10 +161,9 @@ body {
     }
 
 .Comprar {
-    
-    height: 100px;
     width: 340px;
     text-transform: uppercase;
+    box-shadow: 2px -1px 28px 0px rgba(0,0,0,0.75);
 }
 
 .cart .item {
