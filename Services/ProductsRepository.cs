@@ -9,6 +9,7 @@ namespace POS.Services
         Task AddProduct(Product product);
         Task Delete(int id);
         Task EditProduct(Product product);
+        Task EditProducts(IEnumerable<Product> products);
         Task<Product> GetProduct(int ProductId);
         Task<IEnumerable<Product>> GetProducts(IEnumerable<Product> products);
         Task<IEnumerable<Product>> GetProducts();
@@ -66,6 +67,18 @@ namespace POS.Services
                                             price = @Price,
                                             image = @Image
                                             where ProductId = @ProductId", product);
+        }
+
+        public async Task EditProducts(IEnumerable<Product> products)
+        {
+            using var connection = new MySqlConnection(connectionString);
+
+            foreach (var product in products)
+            {
+                await connection.ExecuteAsync(@"UPDATE products SET
+                                            amount = @Available
+                                            where ProductId = @ProductId", product);
+            }
         }
 
         public async Task AddProduct(Product product)

@@ -2,10 +2,16 @@
 @{
     ViewData["Title"] = "Inventario";
 }
-<h1>@ViewData["Title"]</h1>
+@section Options {
+    <div class="op  "><a class="ob" asp-controller="Home" asp-action="Home"><i class="fa-solid fa-house"></i><i class="bi bi-house"></i></a></div>
+    <div class="op"><a class="ob" asp-controller="Home" asp-action="Historic"><i class="bi bi-clock-history"></i></a></div>
+    <div class="op active"><a class="ob" asp-controller="Products" asp-action="Index"><i class="bi bi-archive"></i></a></div>
+}
+
+
 
 @*<input placeholder="Buscar producto..." class="form-control mb-3"/>*@
-<a asp-action="Create" class="btn btn-comprar mb-3">Registrar nuevo producto</a>
+    <a asp-action="Create" class="btn btn-warning text-light fw-bold m-3">Registrar nuevo producto</a>
 
 <div class="products">
     @foreach (var product in Model)
@@ -18,8 +24,8 @@
                 <div>
                     <p class="name">@product.Name</p>
                     <div class="input-group">
-                        <a asp-action="Edit" asp-route-id="@product.ProductId" class="btn btn-primary">Editar producto</a>
-                        <a asp-action="Delete" asp-route-id="@product.ProductId" class="btn btn-danger">Borrar producto</a>
+                        <a asp-action="Edit" asp-route-id="@product.ProductId" class="btn btn-warning text-light fw-bold">Editar producto</a>
+                        <a asp-action="Delete" asp-route-id="@product.ProductId" class="btn btn-secondary text-light fw-bold">Borrar producto</a>
                     </div>
                 </div>
             </div>

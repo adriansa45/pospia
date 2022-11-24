@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/POS.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <style>
+        form{
+            border:none;
+        }
+        form button{
+            border:none;
+        }
+    </style>
 </head>
 
 
@@ -15,14 +23,19 @@
 	<div class="grid">
 		<div class="item sidebar">
 			<nav>
-                <div class="op active "><a class="ob" asp-controller="Home" asp-action="Home"><i class="fa-solid fa-house"></i><i class="bi bi-house"></i></a></div>
-                <div class="op" ><a class="ob" asp-controller="Home" asp-action="Historic"><i class="bi bi-clock-history"></i></a></div>
-                <div class="op" ><a class="ob" asp-controller="Products" asp-action="Index"><i class="bi bi-archive"></i></a></div>
+                @await RenderSectionAsync("Options", required: true) 
 			</nav>
-
+            <nav>
+                <form class="form-inline" asp-action="Logout" asp-controller="Users">
+                    <button type="submit" class="op"><div class="ob"><i class="bi bi-box-arrow-in-right"></i></div></button>
+                </form>
+            </nav>
 		</div>
 		<div class="item body">
-			<div class="top">Bienvenido <p class="nombre">Adrian Robledo</p></div>
+            <div class="top">
+                <div><p>Bienvenido<br /> <p class="nombre">Adrian Robledo</p> </p></div>
+                <div>@ViewData["Title"]</div>
+            </div>
 			<div class="bot">
                 @RenderBody()
 			</div>

@@ -44,6 +44,7 @@ namespace POS.Controllers
                     orderLines.Add(ol);
                 }
 
+                await productsRepository.EditProducts(products);
                 await ordersRepository.CreateOrderLines(orderLines);
             }
             return Json(products);

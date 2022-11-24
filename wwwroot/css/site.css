@@ -35,6 +35,14 @@ body {
     position: fixed;
     box-shadow: 1px -40px 60px 0px rgba(0,0,0,0.5) inset;
 }
+.custom-card {
+    background: #13182056;
+}
+.card input {
+    background: #13182080;
+    border-color: #131820;
+    color: #ffffff99;
+}
 
 .sidebar {
     position: relative;
@@ -44,9 +52,13 @@ body {
     background-color: #131820;
     display: grid;
     justify-content: center;
+    align-content: space-between;
     align-items: flex-start;
     box-shadow: 2px -1px 28px 0px rgba(0,0,0,0.75);
 }
+    .sidebar nav {
+        margin-bottom: 10px;
+    }
 
 .cart {
     display: grid;
@@ -100,15 +112,13 @@ body {
 }
 
     .body .top {
-        z-index: -1;
         width: 100%;
         padding: 0px 40px;
-        height: 140px;
-        position: fixed;
+        height: 80px;
         text-transform: capitalize;
         font-size: 45px;
-        background-color: #242B3D;
-        box-shadow: -1px 12px 19px -6px rgba(0,0,0,0.2);
+        display:flex;
+            gap: 100px;
     }
 
         .body .top .nombre {
@@ -116,7 +126,7 @@ body {
         }
 
     .body .bot {
-        margin-top: 150px;
+        margin-top: 80px;
         z-index: 5;
     }
 
@@ -254,11 +264,9 @@ body {
 .products {
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    z-index: -3;
 }
 
 .product {
-    z-index: -3;
     padding: 20px 0px;
     background-color: #1F2432;
     display: grid;

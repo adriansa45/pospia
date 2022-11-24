@@ -2,21 +2,25 @@
 @{
     ViewData["Title"] = "Historial";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Historial de transacciones</p>
+@section Options {
+    <div class="op  "><a class="ob" asp-controller="Home" asp-action="Home"><i class="fa-solid fa-house"></i><i class="bi bi-house"></i></a></div>
+    <div class="op active"><a class="ob" asp-controller="Home" asp-action="Historic"><i class="bi bi-clock-history"></i></a></div>
+    <div class="op"><a class="ob" asp-controller="Products" asp-action="Index"><i class="bi bi-archive"></i></a></div>
+}
+
 
 <div class="container">
     @foreach (var order in Model)
     {
-        <div class="row card mb-3">
+        <div class="row card m-2 custom-card">
             <div class="card-header">
                 <p>OrderId: @order.OrderId - Fecha: @order.Created</p>
             </div>
             <div class="card-body">
             @foreach (var line in order.orderLines)
             {
-                    <p>Product: @line.Name - Cantidad: @line.Amount  -  Precio: @line.Price - Subtotal: @line.Total</p>
+                    <p>Producto: @line.Name - Cantidad: @line.Amount  -  Precio: @line.Price - Subtotal: @line.Total</p>
                     @if (!line.Equals(order.orderLines.Last()))
                     {
                         <hr/>

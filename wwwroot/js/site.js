@@ -7,13 +7,17 @@ $(document).ready(function () {
     carrito.html('');
 });
 
-function AñadirObjeto(id, name, price) {
+function AñadirObjeto(id, name, price, available) {
     if (productos.every(p => p.ProductId != id)) {
-        let producto = { ProductId: id, Amount: 1, Name: name, Price: price };
+        let producto = { ProductId: id, Amount: 1, Name: name, Price: price, Available: available };
         productos.push(producto);
     } else {
-        productos.find(p => p.ProductId === id).Amount += 1;
+        let product = productos.find(p => p.ProductId === id);
+        if (product.Available > 0) {
+            product.Amount += 1;
+        } 
     }
+    productos.find(p => p.ProductId === id).Available -= 1;
     ImprimirProductos();
 }
 
@@ -26,7 +30,7 @@ function QuitarObjeto(id) {
         } else {
             productos = productos.filter(p => p.ProductId != id);
         }
-
+        producto.Available += 1;
     }
     ImprimirProductos();
 }
@@ -40,7 +44,7 @@ function ImprimirProductos() {
                 <div>
                     <p class="name">`+e.Name+`</p>
                     <div>
-                        <p class="price">`+e.Price+`</p>
+                        <p class="price">$ `+ new Intl.NumberFormat().format(e.Price) +`</p>
                         <div class="btns">
                             <input class="less" type="button"  onclick = "QuitarObjeto(` + e.ProductId + `)" value="-"/>
                             <input class="number" type="number" name="" id="" value="`+ e.Amount+`"/>
@@ -49,7 +53,7 @@ function ImprimirProductos() {
                     </div>
                 </div>
                 <div class="total">
-                    <p>`+ e.Price +`</p>
+                    <p>$ `+ new Intl.NumberFormat().format(e.Price * e.Amount)  +`</p>
                 </div>  
 
             </div>

@@ -2,14 +2,16 @@
 @{
     ViewData["Title"] = "Añadir Product";
 }
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Producto</h1>
-</div>
+@section Options {
+    <div class="op  "><a class="ob" asp-controller="Home" asp-action="Home"><i class="fa-solid fa-house"></i><i class="bi bi-house"></i></a></div>
+    <div class="op"><a class="ob" asp-controller="Home" asp-action="Historic"><i class="bi bi-clock-history"></i></a></div>
+    <div class="op active"><a class="ob" asp-controller="Products" asp-action="Index"><i class="bi bi-archive"></i></a></div>
+}
 
 
 <div class="row">
     <div class="col">
-        <div class="card shadow mb-4">
+        <div class="card shadow m-4 custom-card">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-dark">Crear nuevo producto.</h6>
             </div>
@@ -29,8 +31,8 @@
                             <span asp-validation-for="Amount" class="text-danger"></span>
                         </div>
                         <div class="col-6">
-                            <label asp-for="Price" class="form-label"></label>
-                            <input asp-for="Price" class="form-control" />
+                                <label asp-for="Price" class="form-label"></label>
+                                <input asp-for="Price" class="form-control custom-input" />
                             <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
                     </div>
@@ -44,7 +46,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <button type="submit" class="btn btn-warning fw-bold text-light">Crear</button>
                     <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
                 </form>
             </div>
