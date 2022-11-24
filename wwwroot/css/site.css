@@ -13,6 +13,11 @@ html {
   min-height: 100%;
 }*/
 
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+
 
 body {
     margin: 0;
@@ -76,7 +81,7 @@ body {
     }
 
 .op {
-    margin-top: 5px;
+    margin: 10px;
     width: 90px;
     height: 90px;
     background-color: #131820;
@@ -123,6 +128,7 @@ body {
 
         .body .top .nombre {
             color: #E4AB3B;
+            font-size: 30px;
         }
 
     .body .bot {
@@ -132,10 +138,12 @@ body {
 
 .cart .top {
     margin: 20px 0px 0px 20px;
+    display: flex;
+    font-size: 50px;
 }
 
     .cart .top h3 {
-        font-size: 60px;
+        font-size: 50px;
     }
 
 .cart .bot {
