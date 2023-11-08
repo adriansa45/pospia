@@ -8,6 +8,7 @@ namespace POS.Services
     {
         Task<int> CreateOrder(decimal Total, int UserId);
         Task CreateOrderLines(IEnumerable<OrderLine> OrderLines);
+        Task<IEnumerable<dynamic>> GetOrderLines(DateTime start, DateTime final, int UserId);
         Task<IEnumerable<Order>> GetOrders(int UserId);
     }
     public class OrdersRepository: IOrdersRepository
@@ -83,6 +84,17 @@ namespace POS.Services
             }
             
             return orders;
+        }
+
+        public async Task<IEnumerable<dynamic>> GetOrderLines(DateTime start, DateTime final, int UserId)
+        {
+            using var connection = new MySqlConnection(connectionString);
+            return await connection.QueryAsync<dynamic>(@"select  p.Name, ol.Amount,ol.Price,ol.Total,ol.Created 
+                                                                    from order_lines ol 
+                                                                    join orders o on ol.orderId = o.OrderId
+                                                                    left join products p on ol.ProductId = p.ProductId
+                                                                    where created_by = @UserId and ol.Created between @start and @final
+                                                                    order by ol.created desc", new { UserId, start, final });
         }
 
     }

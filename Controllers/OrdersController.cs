@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ClosedXML.Excel;
+using Microsoft.AspNetCore.Mvc;
 using POS.Models;
 using POS.Services;
+using System.Data;
 
 namespace POS.Controllers
 {
@@ -48,6 +50,61 @@ namespace POS.Controllers
                 await ordersRepository.CreateOrderLines(orderLines);
             }
             return Json(products);
+        }
+
+        [HttpPost]
+        async public Task<FileResult> GetReport(DateTime start, DateTime final)
+        {
+            int userId = serviceUser.GetUserId();
+
+            start = new DateTime(start.Year, start.Day, start.Month);
+            final = new DateTime(final.Year, final.Day, final.Month);
+
+            start = start == DateTime.MinValue ? DateTime.Now.AddDays(-7) : start;
+            final = final == DateTime.MinValue ? DateTime.Now : final;
+
+            if (start > final)
+            {
+                throw new Exception("Fechas invalidas");
+            }
+
+
+            var data = await ordersRepository.GetOrderLines(start, final.AddDays(1), userId);
+
+            DataTable dataTable = new DataTable();
+            dataTable.TableName = "Report";//$"Reporte {start.ToShortDateString()} - {final.ToShortDateString()}";
+            dataTable.Columns.AddRange(new DataColumn[]
+            {
+                new DataColumn("Fecha de Creación"),
+                new DataColumn("Producto"),
+                new DataColumn("Cantidad"),
+                new DataColumn("Precio"),
+                new DataColumn("Total"),
+
+            });
+
+            foreach (var item in data)
+            {
+                dataTable.Rows.Add(
+                    item.Created,
+                    item.Name,
+                    item.Amount,
+                    item.Price,
+                    item.Total
+                    );
+            }
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dataTable);
+
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Reporte.xlsx");
+                }
+            }
+
         }
     }
 }

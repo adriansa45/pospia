@@ -1,6 +1,9 @@
 ﻿@model IEnumerable<Order>
 @{
     ViewData["Title"] = "Historial";
+    var date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+    string start = date.ToString("yyyy-MM-dd");
+    string end = DateTime.Now.ToString("yyyy-MM-dd");
 }
 
 @section Options {
@@ -9,6 +12,31 @@
     <div class="op"><a class="ob" asp-controller="Products" asp-action="Index"><i class="bi bi-archive"></i></a></div>
 }
 
+
+<div class="container">
+    <div class="row card custom-card">
+    <h3 class="m-3">Descargar Reporte de ventas</h3>
+    <div class="row mb-2">
+            <div class="col-6">
+                <label>Fecha Incio</label>
+                <input id="start_date" type="text" class="form-control" data-provide="datepicker" value="@start">
+
+            </div>
+            <div class="col-6">
+                <label>Fecha Fin</label>
+                <input id="final_date" type="text" class="form-control" data-provide="datepicker" value="@end">
+            </div>
+    </div>
+        <div class="row  mb-2">
+            <div class="col-12">
+            <input class="btn btn-primary" onClick="download()" value="Descargar Reporte" />
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
 
 <div class="container">
     @foreach (var order in Model)
@@ -33,3 +61,48 @@
         </div>
     }
 </div>
+
+<script>
+    
+
+    function convertDateFormat(string) {
+        var info = string.split('-').reverse().join('/');
+        return info;
+   }
+
+
+    function download() {
+        var url = "/Orders/GetReport?";
+        var startdate = $('#start_date').val();
+        var finaldate = $('#final_date').val();
+
+        if (startdate){
+            url += 'start=' + convertDateFormat(startdate) + '&'
+        }
+
+        if (finaldate) {
+            url += 'final=' + convertDateFormat(finaldate)
+        }
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            xhrFields:{
+                responseType: 'blob'
+            },
+            success: function (result) {
+                var blob = result;
+                var downloadUrl = URL.createObjectURL(blob);
+                var a = document.createElement("a");
+                a.href = downloadUrl;
+                a.download = "Reporte.xlsx";
+                document.body.appendChild(a);
+                a.click();
+            },
+            error: function (e){
+                alert("Fechas Incorrectas")
+            }
+        });
+
+    }
+</script>
