@@ -13,5 +13,18 @@
     <PackageReference Include="System.Text.Json" Version="6.0.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Transactions\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Transactions\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Transactions\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Transactions\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Subscriptions\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Subscriptions\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Subscriptions\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Subscriptions\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Accounts\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Accounts\Index.cshtml" />
+  </ItemGroup>
+
 
 </Project>

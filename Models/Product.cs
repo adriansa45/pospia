@@ -18,5 +18,9 @@ namespace POS.Models
         [Display(Name = "Imagen")]
         public IFormFile? FormFile { get; set; }
         public int Available { get; set; }
+        [Display(Name = "Categoria")]
+        public Category Category { get; set; }
+        public int CategoryId { get; set; }
+
     }
 }

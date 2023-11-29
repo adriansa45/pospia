@@ -65,7 +65,8 @@ namespace POS.Services
                                             name = @Name,
                                             amount = @Amount,
                                             price = @Price,
-                                            image = @Image
+                                            image = @Image,
+                                            category_Id = @CategoryId
                                             where ProductId = @ProductId", product);
         }
 

@@ -30,16 +30,23 @@
                             <label asp-for="Amount" class="form-label"></label>
                             <input asp-for="Amount" class="form-control" />
                             <span asp-validation-for="Amount" class="text-danger"></span>
-                            <div class="col-6">
-                                <label asp-for="Price" class="form-label"></label>
-                                <input asp-for="Price" class="form-control" />
-                                <span asp-validation-for="Price" class="text-danger"></span>
-                            </div>
+                            
+                        </div>
+                        <div class="col-6">
+                            <label asp-for="Price" class="form-label"></label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-12">
+                        <div class="col-6">
+                            <label asp-for="Category" class="form-label"></label>
+                            <select class="form-control "  asp-for="@Model.Category" asp-items="Html.GetEnumSelectList<Category>()"></select>
+                            <span asp-validation-for="Category" class="text-danger"></span>
+
+                        </div>
+                        <div class="col-6">
                             <label asp-for="FormFile" class="form-label"></label>
                             <input asp-for="FormFile" class="form-control " />
                             <span asp-validation-for="FormFile" class="text-danger"></span>

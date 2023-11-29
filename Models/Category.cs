@@ -2,13 +2,16 @@
 
 namespace POS.Models
 {
-    public class Category
+    public enum Category
     {
-        [Required]
-        public int Id { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public string Color { get; set; }
+
+        Botana = 0,
+        Refresco = 1,
+        [Display(Name = "Bebidas Alcoholica")]
+        BebidasAlcoholica = 2,
+        Galletas = 3,
+        [Display(Name = "Pan Dulce")]
+        PanDulce = 4,
+        Otros =5
     }
 }

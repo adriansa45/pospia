@@ -18,17 +18,19 @@
 </style>
 <h1>@ViewData["Title"]</h1>
 
-<form asp-action="Home">
-    <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Buscar producto..." aria-describedby="SearchBtn">
-  <div class="input-group-append">
-    <button class="btn btn-outline-secondary" type="submit" id="SearchBtn">Buscar</button>
-  </div>
+*@
+<div class="products">
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Categoria
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Action</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
 </div>
-</form>*@
-
-
-
+</div>
 
 <div class="products">
     @foreach (var product in Model)

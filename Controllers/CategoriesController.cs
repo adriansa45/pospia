@@ -1,31 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using POS.Models;
+using POS.Services;
 
 namespace POS.Controllers
 {
     public class CategoriesController: Controller
     {
-        public CategoriesController()
-        {
+        private readonly ICategoriesRepository categoriesRepository;
 
+        public CategoriesController(ICategoriesRepository categoriesRepository)
+        {
+            this.categoriesRepository = categoriesRepository;
         }
 
-        public IActionResult Index()
+        public IActionResult Create(Category category)
         {
-            return View();
+            categoriesRepository.CreateCategory(category);
+            return RedirectToAction("Home", "Home");
         }
 
-        public IActionResult Create()
+        public IActionResult Edit(Category category)
         {
-            return View();
-        }
-
-        public IActionResult Edit()
-        {
-            return View();
-        }
-        public IActionResult Delete()
-        {
-            return View();
+            categoriesRepository.CreateCategory(category);
+            return RedirectToAction("Home", "Home");
         }
     }
 }

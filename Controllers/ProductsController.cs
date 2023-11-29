@@ -17,16 +17,16 @@ namespace POS.Controllers
             this.productsRepository = productsRepository;
         }
 
-        public async Task<IActionResult> Index(string? code = null)
+        public async Task<IActionResult> Index(string? category = null)
         {
             IEnumerable<Product> model;
-            if (code == null)
+            if (category == null)
             {
                 model = await productsRepository.GetProducts();
             }
             else
             {
-                model = await productsRepository.GetProducts(code);
+                model = await productsRepository.GetProducts(category);
             }
             
             return View(model);
@@ -47,6 +47,7 @@ namespace POS.Controllers
 
             product.Image = await SaveImage(product.FormFile);
 
+            product.CategoryId = (int)product.Category;
             await productsRepository.AddProduct(product);
 
 
@@ -59,7 +60,7 @@ namespace POS.Controllers
 
             if (product is null)
             {
-                return RedirectToAction("NoFound", "Home");
+                return RedirectToAction();
             }
 
             return View(product);
@@ -69,14 +70,14 @@ namespace POS.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("NoFound", "Home");
+                return RedirectToAction();
             }
             if (product.FormFile is not null)
             {
                 product.Image = await SaveImage(product.FormFile);
             }
 
-
+            product.CategoryId = (int)product.Category;
             await productsRepository.EditProduct(product);
             return RedirectToAction("Index");
         }
@@ -86,7 +87,7 @@ namespace POS.Controllers
             var product = await productsRepository.GetProduct(id);
             if (product is null)
             {
-                return RedirectToAction("NoFound", "Home");
+                return RedirectToAction();
             }
             return View(product);
         }
@@ -96,7 +97,7 @@ namespace POS.Controllers
         {
             if (product is null)
             {
-                return RedirectToAction("NoFound", "Home");
+                return RedirectToAction();
             }
 
             await productsRepository.Delete(product.ProductId);

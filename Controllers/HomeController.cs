@@ -21,11 +21,6 @@ namespace POS.Controllers
             this.productsRepository = productsRepository;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public async Task<IActionResult> Home()
         {
             var products = await productsRepository.GetProducts();
@@ -36,10 +31,6 @@ namespace POS.Controllers
             int userId = serviceUser.GetUserId();
             var model = await ordersRepository.GetOrders(userId);
             return View(model);
-        }
-        public IActionResult Promotions()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
