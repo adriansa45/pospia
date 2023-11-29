@@ -39,7 +39,12 @@ namespace POS.Services
         public async Task<IEnumerable<Product>> GetProducts()
         {
             using var connection = new MySqlConnection(connectionString);
-            return await connection.QueryAsync<Product>("select * from products");
+            IEnumerable<Product> products = await connection.QueryAsync<Product>("select * from products");
+            foreach (var p in products)
+            {
+                p.Category = (Category)p.CategoryId;
+            }
+            return products;
         }
 
 
@@ -53,7 +58,7 @@ namespace POS.Services
         {
             using var connection = new MySqlConnection(connectionString);
             var product = await connection.QuerySingleAsync<Product>("select * from products where ProductId = @ProductId", new { ProductId });
-
+            product.Category = (Category)product.CategoryId;
             return product;
         }
 
@@ -66,7 +71,7 @@ namespace POS.Services
                                             amount = @Amount,
                                             price = @Price,
                                             image = @Image,
-                                            category_Id = @CategoryId
+                                            categoryId = @CategoryId
                                             where ProductId = @ProductId", product);
         }
 
@@ -86,9 +91,9 @@ namespace POS.Services
         {
             using var connection = new MySqlConnection(connectionString);
             int id = await connection.QuerySingleAsync<int>(@"INSERT INTO products 
-                                                            (name, amount, price, image)
+                                                            (name, amount, price, image, categoryId)
                                                             VALUES 
-                                                            (@Name, @Amount, @Price, @Image);
+                                                            (@Name, @Amount, @Price, @Image, @categoryId);
                                                             SELECT LAST_INSERT_ID();", product);
 
             product.ProductId = id;

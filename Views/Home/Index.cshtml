@@ -3,7 +3,7 @@
     ViewData["Title"] = "Inicio";
 }
 @section Options {
-    <div class="op active "><a class="ob" asp-controller="Home" asp-action="Home"><i class="fa-solid fa-house"></i><i class="bi bi-house"></i></a></div>
+    <div class="op active "><a class="ob" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i><i class="bi bi-house"></i></a></div>
     <div class="op"><a class="ob" asp-controller="Home" asp-action="Historic"><i class="bi bi-clock-history"></i></a></div>
     <div class="op"><a class="ob" asp-controller="Products" asp-action="Index"><i class="bi bi-archive"></i></a></div>
 }
@@ -20,16 +20,23 @@
 
 *@
 <div class="products">
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Categoria
-    </button>
-    <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
-    </ul>
-</div>
+    @{
+        if (Model is null) return;
+
+        if (Model.Count() < 1) return;
+
+    <form  asp-action="Index" asp-controller="Home" enctype="multipart/form-data">
+        <div class="row m-3">
+            <div class="col-6">
+                <select class="form-control "  asp-for="@Model.First().Category" asp-items="Html.GetEnumSelectList<Category>()"></select>
+            </div>
+            <div class="col-6">
+                <button type="submit" class="btn btn-warning fw-bold text-light">Buscar</button>
+            </div>
+        </div>
+        
+    </form>
+    }
 </div>
 
 <div class="products">
@@ -51,15 +58,5 @@
                 </div>
             </div>
         }
-
-
-@*    <div class="card">
-        <div class="card-header">@product.Name</div>
-        <div class="card-body"><img style="width: 100%;" src="~/imgs/@product.Image" /></div>
-        <div class="card-footer">
-            <p>$ @product.Price</p>
-            <button id="@product.ProductId" class="btn btn-primary" onclick="AñadirObjeto(@product.ProductId, '@product.Name', @product.Price)">Añadir producto</button>
-        </div>
-    </div>*@
     }
 </div>

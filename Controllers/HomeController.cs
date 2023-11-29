@@ -21,10 +21,11 @@ namespace POS.Controllers
             this.productsRepository = productsRepository;
         }
 
-        public async Task<IActionResult> Home()
+        public async Task<IActionResult> Index(Category category)
         {
             var products = await productsRepository.GetProducts();
-            return View(products);
+            var filterProduct = products.Where(e => e.CategoryId == (int)category);
+            return View(filterProduct);
         }
         public async Task<IActionResult> Historic()
         {

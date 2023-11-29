@@ -16,13 +16,13 @@ namespace POS.Controllers
         public IActionResult Create(Category category)
         {
             categoriesRepository.CreateCategory(category);
-            return RedirectToAction("Home", "Home");
+            return RedirectToAction("Home", "Index");
         }
 
         public IActionResult Edit(Category category)
         {
             categoriesRepository.CreateCategory(category);
-            return RedirectToAction("Home", "Home");
+            return RedirectToAction("Home", "Index");
         }
     }
 }

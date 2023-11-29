@@ -50,7 +50,7 @@ namespace POS.Controllers
             
             if (result.Succeeded)
 			{
-                return RedirectToAction("Home", "Home");
+                return RedirectToAction("Home", "Index");
 			}
 			else
 			{
@@ -78,7 +78,7 @@ namespace POS.Controllers
             if (result.Succeeded)
             {
                 await signInManager.SignInAsync(user, isPersistent: true);
-                return RedirectToAction("Home", "Home");
+                return RedirectToAction("Home", "Index");
             }
             else
             {
